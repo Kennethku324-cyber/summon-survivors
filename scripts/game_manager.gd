@@ -76,6 +76,7 @@ var level_up_panel: Control
 var difficulty_select_panel: Control
 var hud_canvas: CanvasLayer
 var hud_root: Control
+var custom_theme: Theme
 
 @onready var camera: Camera2D = $Camera2D
 @onready var spawn_timer: Timer = $SpawnTimer
@@ -113,11 +114,13 @@ func _create_hud():
 	hud_root = Control.new()
 	canvas.add_child(hud_root)
 
-	# Load Chinese font for all UI text
+	# Load Chinese font for all UI text in the HUD
 	var noto_font = load("res://assets/fonts/NotoSansTC-Regular.ttf")
-	if noto_font and ThemeDB.default_project_theme:
-		ThemeDB.default_project_theme.set_font("font", "Label", noto_font)
-		ThemeDB.default_project_theme.set_font("font", "Button", noto_font)
+	if noto_font:
+		custom_theme = Theme.new()
+		custom_theme.set_font("font", "Label", noto_font)
+		custom_theme.set_font("font", "Button", noto_font)
+		hud_root.theme = custom_theme
 
 	var margin = 16
 	var bar_w = 200
@@ -297,6 +300,8 @@ func is_walkable(world_pos: Vector2) -> bool:
 func _show_difficulty_select():
 	difficulty_select_panel = Control.new()
 	hud_canvas.add_child(difficulty_select_panel)
+	if custom_theme:
+		difficulty_select_panel.theme = custom_theme
 
 	var bg = ColorRect.new()
 	bg.color = Color(0, 0, 0, 0.85)
