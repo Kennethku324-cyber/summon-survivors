@@ -115,7 +115,7 @@ func _create_hud():
 
 	# Load Chinese font for all UI text
 	var noto_font = load("res://assets/fonts/NotoSansTC-Regular.ttf")
-	if noto_font:
+	if noto_font and ThemeDB.default_project_theme:
 		ThemeDB.default_project_theme.set_font("font", "Label", noto_font)
 		ThemeDB.default_project_theme.set_font("font", "Button", noto_font)
 
