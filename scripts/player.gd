@@ -15,13 +15,13 @@ func _setup_sprite():
 	var frames = SpriteFrames.new()
 
 	frames.add_animation("idle")
-	var idle_tex = load("res://assets/Main_charactor/idle.png")
+	var idle_tex = load("res://assets/Main_Charactor/idle.png")
 	if idle_tex:
 		frames.add_frame("idle", idle_tex)
 
 	frames.add_animation("walk")
 	for i in range(1, 7):
-		var tex = load("res://assets/Main_charactor/walk_cycle/" + str(i) + ".png")
+		var tex = load("res://assets/Main_Charactor/walk_cycle/" + str(i) + ".png")
 		if tex:
 			frames.add_frame("walk", tex)
 

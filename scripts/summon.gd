@@ -68,16 +68,16 @@ func _setup_sprite():
 					frames.add_frame("attack", tex)
 		1: # Golem
 			frames.add_animation("idle")
-			var idle_tex = load("res://assets/stone/Stone_idle.png")
+			var idle_tex = load("res://assets/Stone/Stone_idle.png")
 			if idle_tex:
 				frames.add_frame("idle", idle_tex)
 			frames.add_animation("walk")
 			for i in range(1, 7):
-				var tex = load("res://assets/stone/Stone_Walk/Stone_Walk_" + str(i) + ".png")
+				var tex = load("res://assets/Stone/Stone_Walk/Stone_Walk_" + str(i) + ".png")
 				if tex:
 					frames.add_frame("walk", tex)
 			frames.add_animation("attack")
-			var atk_tex = load("res://assets/stone/Stone_Attack.png")
+			var atk_tex = load("res://assets/Stone/Stone_Attack.png")
 			if atk_tex:
 				frames.add_frame("attack", atk_tex)
 		2: # Frost Mage
