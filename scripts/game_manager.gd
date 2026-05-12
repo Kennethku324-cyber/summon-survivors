@@ -392,9 +392,9 @@ func start_game():
 	update_hud()
 
 func _play_music():
-	var path = "res://assets/Music/8bit.mp3"
+	var path = "res://assets/Music/8bit.ogg"
 	if current_difficulty == Difficulty.INDIA:
-		path = "res://assets/Music/india.mp3"
+		path = "res://assets/Music/india.ogg"
 	var stream = load(path)
 	if stream:
 		stream.set_loop(true)
