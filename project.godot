@@ -23,3 +23,8 @@ InputSetup="*res://scripts/input_setup.gd"
 window/size/resizable=false
 window/size/window_width_override=1152
 window/size/window_height_override=648
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

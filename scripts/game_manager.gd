@@ -113,6 +113,12 @@ func _create_hud():
 	hud_root = Control.new()
 	canvas.add_child(hud_root)
 
+	# Load Chinese font for all UI text
+	var noto_font = load("res://assets/fonts/NotoSansTC-Regular.ttf")
+	if noto_font:
+		ThemeDB.default_project_theme.set_font("font", "Label", noto_font)
+		ThemeDB.default_project_theme.set_font("font", "Button", noto_font)
+
 	var margin = 16
 	var bar_w = 200
 	var bar_h = 20
@@ -386,9 +392,9 @@ func start_game():
 	update_hud()
 
 func _play_music():
-	var path = "res://assets/music/8bit.mp3"
+	var path = "res://assets/Music/8bit.mp3"
 	if current_difficulty == Difficulty.INDIA:
-		path = "res://assets/music/india.mp3"
+		path = "res://assets/Music/india.mp3"
 	var stream = load(path)
 	if stream:
 		stream.set_loop(true)

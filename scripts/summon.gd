@@ -130,13 +130,13 @@ func _setup_audio():
 	var path: String
 	match summon_type:
 		0:
-			path = "res://assets/music/fireball.mp3"
+			path = "res://assets/Music/fireball.mp3"
 		1:
-			path = "res://assets/music/impact.mp3"
+			path = "res://assets/Music/impact.mp3"
 		2:
-			path = "res://assets/music/arrow_shooting.mp3"
+			path = "res://assets/Music/arrow_shooting.mp3"
 		3:
-			path = "res://assets/music/electric_magic.mp3"
+			path = "res://assets/Music/electric_magic.mp3"
 		_:
 			return
 	var stream = load(path)
