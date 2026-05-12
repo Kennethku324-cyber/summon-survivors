@@ -77,6 +77,7 @@ var difficulty_select_panel: Control
 var hud_canvas: CanvasLayer
 var hud_root: Control
 var custom_theme: Theme
+var hud_ready: bool = false
 
 @onready var camera: Camera2D = $Camera2D
 @onready var spawn_timer: Timer = $SpawnTimer
@@ -86,9 +87,12 @@ func _ready():
 	process_mode = PROCESS_MODE_ALWAYS
 	randomize()
 	_create_containers()
-	_create_hud()
 	_load_walkable_map()
+	# Wait one frame for viewport to be properly sized
+	await get_tree().process_frame
+	_create_hud()
 	_show_difficulty_select()
+	hud_ready = true
 
 func _create_containers():
 	enemy_container = Node2D.new()
@@ -421,6 +425,8 @@ func _spawn_player():
 	add_child(player)
 	player.initialize(self)
 func _process(delta):
+	if not hud_ready:
+		return
 	if Input.is_action_just_pressed("ui_cancel"):
 		_toggle_pause()
 	if game_paused or is_game_over or level_up_active:
