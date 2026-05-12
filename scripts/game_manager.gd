@@ -122,6 +122,9 @@ func _create_hud():
 		custom_theme.set_font("font", "Button", noto_font)
 		hud_root.theme = custom_theme
 
+	var vp_size = get_viewport().get_visible_rect().size
+	var sw = vp_size.x
+	var sh = vp_size.y
 	var margin = 16
 	var bar_w = 200
 	var bar_h = 20
@@ -169,7 +172,7 @@ func _create_hud():
 	# Time label
 	time_label = Label.new()
 	time_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	time_label.position = Vector2(1152/2 - 100, margin)
+	time_label.position = Vector2(sw/2 - 100, margin)
 	time_label.size = Vector2(200, 24)
 	time_label.add_theme_font_size_override("font_size", 51)
 	time_label.text = "0:00"
@@ -179,7 +182,7 @@ func _create_hud():
 	music_toggle_btn = Button.new()
 	music_toggle_btn.text = "♪"
 	music_toggle_btn.add_theme_font_size_override("font_size", 28)
-	music_toggle_btn.position = Vector2(1152 - 16 - 50, 16)
+	music_toggle_btn.position = Vector2(sw - 16 - 50, 16)
 	music_toggle_btn.size = Vector2(50, 50)
 	music_toggle_btn.toggled.connect(_toggle_music)
 	music_toggle_btn.toggle_mode = true
@@ -189,7 +192,7 @@ func _create_hud():
 	pause_btn = Button.new()
 	pause_btn.text = "II"
 	pause_btn.add_theme_font_size_override("font_size", 28)
-	pause_btn.position = Vector2(1152 - 16 - 50 - 50 - 8, 16)
+	pause_btn.position = Vector2(sw - 16 - 50 - 50 - 8, 16)
 	pause_btn.size = Vector2(50, 50)
 	pause_btn.process_mode = PROCESS_MODE_ALWAYS
 	pause_btn.pressed.connect(_toggle_pause)
@@ -202,14 +205,14 @@ func _create_hud():
 	hud_root.add_child(pause_overlay)
 	var p_bg = ColorRect.new()
 	p_bg.color = Color(0, 0, 0, 0.6)
-	p_bg.size = Vector2(1152, 648)
+	p_bg.size = Vector2(sw, sh)
 	p_bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	pause_overlay.add_child(p_bg)
 	var p_label = Label.new()
 	p_label.text = "暫停"
 	p_label.add_theme_font_size_override("font_size", 72)
 	p_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	p_label.position = Vector2(1152/2 - 150, 648/2 - 50)
+	p_label.position = Vector2(sw/2 - 150, sh/2 - 50)
 	p_label.size = Vector2(300, 100)
 	pause_overlay.add_child(p_label)
 
@@ -219,13 +222,13 @@ func _create_hud():
 	hud_root.add_child(game_over_panel)
 	var bg = ColorRect.new()
 	bg.color = Color(0, 0, 0, 0.7)
-	bg.size = Vector2(1152, 648)
+	bg.size = Vector2(sw, sh)
 	game_over_panel.add_child(bg)
 	var go_label = Label.new()
 	go_label.text = "遊戲結束"
 	go_label.add_theme_font_size_override("font_size", 62)
 	go_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	go_label.position = Vector2(1152/2 - 200, 648/2 - 150)
+	go_label.position = Vector2(sw/2 - 200, sh/2 - 150)
 	go_label.size = Vector2(400, 80)
 	game_over_panel.add_child(go_label)
 	var stats_label = Label.new()
@@ -233,13 +236,13 @@ func _create_hud():
 	stats_label.text = ""
 	stats_label.add_theme_font_size_override("font_size", 51)
 	stats_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	stats_label.position = Vector2(1152/2 - 200, 648/2 - 10)
+	stats_label.position = Vector2(sw/2 - 200, sh/2 - 10)
 	stats_label.size = Vector2(400, 120)
 	game_over_panel.add_child(stats_label)
 	var restart_btn = Button.new()
 	restart_btn.text = "重新開始"
 	restart_btn.add_theme_font_size_override("font_size", 24)
-	restart_btn.position = Vector2(1152/2 - 84, 648/2 + 130)
+	restart_btn.position = Vector2(sw/2 - 84, sh/2 + 130)
 	restart_btn.size = Vector2(168, 56)
 	restart_btn.pressed.connect(_restart)
 	game_over_panel.add_child(restart_btn)
@@ -250,19 +253,19 @@ func _create_hud():
 	hud_root.add_child(level_up_panel)
 	var lu_bg = ColorRect.new()
 	lu_bg.color = Color(0, 0, 0, 0.8)
-	lu_bg.size = Vector2(1152, 648)
+	lu_bg.size = Vector2(sw, sh)
 	level_up_panel.add_child(lu_bg)
 	var lu_label = Label.new()
 	lu_label.name = "LU_label"
 	lu_label.text = "升級！"
 	lu_label.add_theme_font_size_override("font_size", 47)
 	lu_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	lu_label.position = Vector2(1152/2 - 150, 60)
+	lu_label.position = Vector2(sw/2 - 150, 60)
 	lu_label.size = Vector2(300, 50)
 	level_up_panel.add_child(lu_label)
 	var choice_container = HBoxContainer.new()
 	choice_container.name = "Choices"
-	choice_container.position = Vector2(1152/2 - 500, 170)
+	choice_container.position = Vector2(sw/2 - 500, 170)
 	choice_container.size = Vector2(1000, 300)
 	choice_container.alignment = BoxContainer.ALIGNMENT_CENTER
 	level_up_panel.add_child(choice_container)
@@ -272,7 +275,7 @@ func _create_hud():
 	lv_mouse_hint.text = "請用滑鼠選擇提升項目"
 	lv_mouse_hint.add_theme_font_size_override("font_size", 22)
 	lv_mouse_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	lv_mouse_hint.position = Vector2(1152/2 - 200, 480)
+	lv_mouse_hint.position = Vector2(sw/2 - 200, 480)
 	lv_mouse_hint.size = Vector2(400, 30)
 	level_up_panel.add_child(lv_mouse_hint)
 
@@ -298,6 +301,9 @@ func is_walkable(world_pos: Vector2) -> bool:
 	return pixel.r > 0.5
 
 func _show_difficulty_select():
+	var vp_size = get_viewport().get_visible_rect().size
+	var sw = vp_size.x
+	var sh = vp_size.y
 	difficulty_select_panel = Control.new()
 	hud_canvas.add_child(difficulty_select_panel)
 	if custom_theme:
@@ -305,14 +311,14 @@ func _show_difficulty_select():
 
 	var bg = ColorRect.new()
 	bg.color = Color(0, 0, 0, 0.85)
-	bg.size = Vector2(1152, 648)
+	bg.size = Vector2(sw, sh)
 	difficulty_select_panel.add_child(bg)
 
 	var title = Label.new()
 	title.text = "召喚王"
 	title.add_theme_font_size_override("font_size", 102)
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.position = Vector2(1152/2 - 350, 20)
+	title.position = Vector2(sw/2 - 350, 20)
 	title.size = Vector2(700, 120)
 	difficulty_select_panel.add_child(title)
 
@@ -320,7 +326,7 @@ func _show_difficulty_select():
 	instr.text = "方向鍵控制"
 	instr.add_theme_font_size_override("font_size", 28)
 	instr.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	instr.position = Vector2(1152/2 - 150, 150)
+	instr.position = Vector2(sw/2 - 150, 150)
 	instr.size = Vector2(300, 40)
 	difficulty_select_panel.add_child(instr)
 
@@ -328,12 +334,12 @@ func _show_difficulty_select():
 	subtitle.text = "選擇難度"
 	subtitle.add_theme_font_size_override("font_size", 51)
 	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	subtitle.position = Vector2(1152/2 - 200, 200)
+	subtitle.position = Vector2(sw/2 - 200, 200)
 	subtitle.size = Vector2(400, 60)
 	difficulty_select_panel.add_child(subtitle)
 
 	var grid = GridContainer.new()
-	grid.position = Vector2(1152/2 - 280, 265)
+	grid.position = Vector2(sw/2 - 280, 265)
 	grid.size = Vector2(560, 340)
 	grid.columns = 2
 	difficulty_select_panel.add_child(grid)
@@ -342,7 +348,7 @@ func _show_difficulty_select():
 	mouse_hint.text = "請用滑鼠選擇難度"
 	mouse_hint.add_theme_font_size_override("font_size", 22)
 	mouse_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	mouse_hint.position = Vector2(1152/2 - 200, 615)
+	mouse_hint.position = Vector2(sw/2 - 200, 615)
 	mouse_hint.size = Vector2(400, 30)
 	difficulty_select_panel.add_child(mouse_hint)
 
